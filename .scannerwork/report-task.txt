@@ -1,6 +1,6 @@
-projectKey=weatherPOC
-serverUrl=http://localhost:55002
+projectKey=tkosidigital_WeatherApp_AYtGj86bR2CKxTNBTJWA
+serverUrl=http://localhost:55001
 serverVersion=10.2.1.78527
-dashboardUrl=http://localhost:55002/dashboard?id=weatherPOC
-ceTaskId=AYs8865UEmEiUDtWtUla
-ceTaskUrl=http://localhost:55002/api/ce/task?id=AYs8865UEmEiUDtWtUla
+dashboardUrl=http://localhost:55001/dashboard?id=tkosidigital_WeatherApp_AYtGj86bR2CKxTNBTJWA
+ceTaskId=AYtGodVtR2CKxTNBTJWR
+ceTaskUrl=http://localhost:55001/api/ce/task?id=AYtGodVtR2CKxTNBTJWR
