@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeatherDetailHeaderCollectionViewCell" id="AOL-SM-NLQ" customClass="WeatherDetailHeaderCollectionViewCell" customModule="WeatherApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="156"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="373" height="156"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K8B-Ai-j7r" userLabel="UIView">
+                        <rect key="frame" x="0.0" y="0.0" width="373" height="156"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9v-We-hqH">
+                                <rect key="frame" x="146" y="20" width="81.5" height="66"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ste-Zd-urs">
+                                <rect key="frame" x="165.5" y="94" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ClearSky" translatesAutoresizingMaskIntoConstraints="NO" id="5BC-68-aYj">
+                                <rect key="frame" x="235.5" y="46" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="WRg-zL-DXh"/>
+                                    <constraint firstAttribute="height" constant="40" id="gTf-fL-DjW"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ste-Zd-urs" firstAttribute="centerX" secondItem="J9v-We-hqH" secondAttribute="centerX" id="3Ld-cl-D3K"/>
+                            <constraint firstItem="J9v-We-hqH" firstAttribute="top" secondItem="K8B-Ai-j7r" secondAttribute="top" constant="20" id="Epb-mX-i5x"/>
+                            <constraint firstItem="5BC-68-aYj" firstAttribute="leading" secondItem="J9v-We-hqH" secondAttribute="trailing" constant="8" id="RTh-k0-fYs"/>
+                            <constraint firstItem="ste-Zd-urs" firstAttribute="top" secondItem="J9v-We-hqH" secondAttribute="bottom" constant="8" id="cvd-BK-U82"/>
+                            <constraint firstItem="5BC-68-aYj" firstAttribute="bottom" secondItem="J9v-We-hqH" secondAttribute="bottom" id="o5L-02-aPN"/>
+                            <constraint firstItem="J9v-We-hqH" firstAttribute="centerX" secondItem="K8B-Ai-j7r" secondAttribute="centerX" id="qWd-iu-7bb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="K8B-Ai-j7r" secondAttribute="bottom" id="1dL-St-fTY"/>
+                <constraint firstAttribute="trailing" secondItem="K8B-Ai-j7r" secondAttribute="trailing" id="WQa-mE-sJu"/>
+                <constraint firstItem="K8B-Ai-j7r" firstAttribute="top" secondItem="AOL-SM-NLQ" secondAttribute="top" id="iSQ-nA-7kM"/>
+                <constraint firstItem="K8B-Ai-j7r" firstAttribute="leading" secondItem="AOL-SM-NLQ" secondAttribute="leading" id="z8u-xv-q6U"/>
+            </constraints>
+            <size key="customSize" width="373" height="156"/>
+            <connections>
+                <outlet property="detailLabel" destination="J9v-We-hqH" id="l8d-Kv-R5z"/>
+                <outlet property="titleLabel" destination="ste-Zd-urs" id="BuD-5O-f8L"/>
+                <outlet property="weatherImage" destination="5BC-68-aYj" id="ReT-Fw-Y9p"/>
+            </connections>
+            <point key="canvasLocation" x="-404" y="-38"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ClearSky" width="300" height="200"/>
+    </resources>
+</document>
