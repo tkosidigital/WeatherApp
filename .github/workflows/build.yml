@@ -4,19 +4,27 @@ on:
   push:
     branches:
       - main  # Change this to your main branch name
+  pull_request:
+    branches:
+      - main
 
 jobs:
   sonarqube:
-    runs-on: macos-latest
+    runs-on: macOS-latest
 
     steps:
-      - name: Check Out Code
-        uses: actions/checkout@v2
-
-      - name: Set Up Swift
-        uses: actions/setup-swift@v2
+      - name: Checkout Code
+        uses: actions/checkout@main
+        
+      - name: Set Up Xcode
+        uses: actions/setup-xcode@main
         with:
-          swift-version: '5.5'  # Adjust to your Swift version
+          xcode-version: '14.1'
+          
+      - name: Set Up Swift
+        uses: actions/setup-swift@main
+        with:
+          swift-version: '4.0'  # Adjust to your Swift version
 
       - name: Install SonarScanner
         run: |
