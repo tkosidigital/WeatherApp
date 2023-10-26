@@ -1,12 +1,9 @@
-name: SonarQube
+name: SonarQube Analysis
 
 on:
   push:
     branches:
       - main  # Change this to your main branch name
-  pull_request:
-    branches:
-      - main
 
 jobs:
   sonarqube:
@@ -15,12 +12,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@main
-        
-          
-      - name: Set Up Swift
-        uses: actions/setup-swift@v2
+
+      - name: Setup Swift
+        uses: swift-actions/setup-swift@v1.24.0
         with:
-          swift-version: '4.0'  # Adjust to your Swift version
+            swift-version: 4
 
       - name: Install SonarScanner
         run: |
@@ -36,4 +32,3 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONARQUBE_URL }}
-
