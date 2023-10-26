@@ -1,0 +1,65 @@
+name: Swift CI
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  build:
+    runs-on: macOS-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@main
+
+    - name: Setup Swift
+      uses: swift-actions/setup-swift@v1.24.0
+      with:
+          swift-version: 4 # Adjust this to your project's Swift version
+    - name: Build
+      run: |
+           xcodebuild clean build -workspace "WeatherApp.xcworkspace" -scheme "WeatherApp" -destination "platform=iOS Simulator,name=iPhone 12 Pro,OS=latest" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+    - name: Install SwiftLint
+      run: |
+        brew install swiftlint
+      if: success()
+
+    - name: Run SwiftLint
+      run: |
+        swiftlint lint --strict
+      continue-on-error: true
+
+    - name: Check for SwiftLint Warnings
+      run: |
+        SWIFTLINT_ERRORS=$(swiftlint lint --strict | grep "warning:" || true)
+        if [ -n "$SWIFTLINT_ERRORS" ]; then
+          echo "SwiftLint warnings found:"
+          echo "$SWIFTLINT_ERRORS"
+          exit 1
+        fi
+    - name: Install swift-format
+      run: |
+        # Install swift-format if not already installed
+        if ! [ -x "$(command -v swift-format)" ]; then
+          brew install swift-format
+        fi
+    - name: Run swift-format
+      run: |
+        # Run swift-format on specific Swift files (e.g., all .swift files in your project)
+        find . -name "*.swift" -print0 | xargs -0 swift-format
+    - name: Archive iOS App
+      run: |
+        xcodebuild -workspace "WeatherApp.xcworkspace" -scheme "WeatherApp" -destination "generic/platform=iOS" archive -archivePath Archives/weatherAppArchive.xcarchive
+        working-directory: /Users/tkandimalla/Downloads/WeatherApp-master/WeatherApp
+
+    - name: Export iOS Build
+      run: |
+        xcodebuild -exportArchive -archivePath Archives/weatherAppArchive.xcarchive -exportPath /Users/tkandimalla/Documents/SwiftWorkSpace/EmployeeDetails/ExportedBuild -exportOptionsPlist /Users/tkandimalla/Documents/SwiftWorkSpace/EmployeeDetails/ExportOptions.plist
+        working-directory: /Users/tkandimalla/Downloads/WeatherApp-master/WeatherApp
+
+    - name: Upload iOS Build
+      uses: actions/upload-artifact@v2
+      with:
+        name: ios-build-artifacts
+        path: /Users/tkandimalla/Downloads/WeatherApp-master/WeatherApp/ExportedBuild
