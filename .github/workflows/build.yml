@@ -16,13 +16,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@main
         
-      - name: Set Up Xcode
-        uses: actions/setup-xcode@main
-        with:
-          xcode-version: '14.1'
           
       - name: Set Up Swift
-        uses: actions/setup-swift@main
+        uses: actions/setup-swift@v2
         with:
           swift-version: '4.0'  # Adjust to your Swift version
 
