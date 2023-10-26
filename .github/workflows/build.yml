@@ -1,30 +1,35 @@
-name: Build
+name: SonarQube
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+      - main  # Change this to your main branch name
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    permissions: read-all
+  sonarqube:
+    runs-on: macos-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Check Out Code
+        uses: actions/checkout@v2
+
+      - name: Set Up Swift
+        uses: actions/setup-swift@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: sonarsource/sonarqube-scan-action@master
+          swift-version: '5.5'  # Adjust to your Swift version
+
+      - name: Install SonarScanner
+        run: |
+          curl --output sonar-scanner-cli.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2743-macosx.zip
+          unzip sonar-scanner-cli.zip
+          export PATH=$PATH:"$PWD/sonar-scanner-4.7.0.2743-macosx/bin"
+
+      - name: Build and Analyze
+        run: |
+          swift build
+          sonar-scanner
+
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-      # We do not recommend to use this in a pull request. Prefer using pull request
-      # decoration instead.
-      # - uses: sonarsource/sonarqube-quality-gate-action@master
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONARQUBE_URL }}
+
