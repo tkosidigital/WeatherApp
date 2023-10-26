@@ -21,7 +21,7 @@ jobs:
       - name: Install SonarScanner
         run: |
           curl --output sonar-scanner-cli.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2743-macosx.zip
-          unzip sonar-scanner-cli.zip
+          unzip -t sonar-scanner-cli.zip
           export PATH=$PATH:"$PWD/sonar-scanner-4.7.0.2743-macosx/bin"
 
       - name: Build and Analyze
