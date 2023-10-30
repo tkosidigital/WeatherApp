@@ -1,28 +1,30 @@
-name: SonarQube Analysis
+name: Build
 
 on:
   push:
     branches:
-      - main  # Change this to your main branch name
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  sonarqube:
+  build:
+    name: Build
     runs-on: macOS-latest
-
+    permissions: read-all
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@main
-
-      - name: Setup Swift
-        uses: swift-actions/setup-swift@v1.24.0
+      - uses: actions/checkout@v2
         with:
-            swift-version: 4
-
-      - name: Build and Analyze
-        run: |
-          cd /Users/tkandimalla/Downloads/WeatherApp-master/WeatherApp
-          swift build
-
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: sonarsource/sonarqube-scan-action@master
         env:
-          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONARQUBE_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # following lines. This would typically be used to fail a deployment.
+      # We do not recommend to use this in a pull request. Prefer using pull request
+      # decoration instead.
+      # - uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
