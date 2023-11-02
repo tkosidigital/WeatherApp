@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     
     fileprivate let viewModel = HomeViewModel()
     
-//    let unusedVariable = 42
     
     override func viewDidLoad() {
         super.viewDidLoad()
